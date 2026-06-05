@@ -5,22 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EPA授業管理</title>
 <script>
-// GASのiframe内でviewportが効かない問題をJSで強制修正
 (function(){
-  // viewportを強制設定
   var vp = document.querySelector('meta[name=viewport]');
   if(vp) vp.setAttribute('content', 'width=device-width, initial-scale=1.0');
-
-  // 画面幅を取得してスケールを計算・適用
   function fixScale(){
     var w = window.innerWidth || document.documentElement.clientWidth || screen.width;
-    var scale = w / 390; // iPhone標準幅390pxを基準
+    var scale = w / 390;
     if(scale < 1){
       var vp2 = document.querySelector('meta[name=viewport]');
       if(vp2) vp2.setAttribute('content', 'width=390, initial-scale=' + scale);
     }
   }
-
   if(document.readyState === 'loading'){
     document.addEventListener('DOMContentLoaded', fixScale);
   } else {
@@ -36,8 +31,6 @@
 html{width:100%;overflow-x:hidden;}
 body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:16px;line-height:1.7;-webkit-text-size-adjust:100%;word-break:break-word;overflow-x:hidden;}
 img{max-width:100%;height:auto;display:block;}
-
-/* ── ログイン ── */
 .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;width:100%;}
 .login-card{background:var(--surface);border-radius:var(--r);padding:28px 24px;width:100%;max-width:100%;box-shadow:0 4px 24px rgba(0,0,0,0.08);}
 .login-logo{text-align:center;margin-bottom:24px;}
@@ -53,8 +46,6 @@ img{max-width:100%;height:auto;display:block;}
 .login-btn{width:100%;padding:16px;font-size:17px;font-family:'Noto Sans JP',sans-serif;font-weight:700;border:none;border-radius:var(--rs);background:var(--text);color:var(--surface);cursor:pointer;margin-top:8px;-webkit-appearance:none;}
 .login-err{font-size:14px;color:var(--red);margin-top:10px;text-align:center;min-height:20px;}
 .login-loading{font-size:13px;color:var(--muted);text-align:center;margin-top:8px;display:none;}
-
-/* ── ヘッダー ── */
 header{background:var(--surface);border-bottom:1px solid var(--border);height:56px;display:flex;align-items:center;padding:0 12px;gap:6px;position:sticky;top:0;z-index:100;width:100%;max-width:100vw;overflow:hidden;}
 .logo{font-size:15px;font-weight:700;letter-spacing:-.3px;white-space:nowrap;flex-shrink:0;}
 .logo em{font-style:normal;color:var(--blue);}
@@ -64,16 +55,12 @@ header{background:var(--surface);border-bottom:1px solid var(--border);height:56
 .role-admin{background:var(--blue-bg);color:var(--blue);}
 .role-instructor{background:var(--green-bg);color:var(--green);}
 .logout-btn{font-size:12px;padding:5px 10px;border:1px solid var(--border-md);border-radius:var(--rs);background:none;cursor:pointer;color:var(--muted);font-family:'Noto Sans JP',sans-serif;white-space:nowrap;flex-shrink:0;-webkit-appearance:none;}
-
-/* ── レイアウト ── */
 .wrap{width:100%;max-width:min(680px,100vw);margin:0 auto;padding:20px 16px 80px;overflow-x:hidden;}
 .tabs{display:flex;gap:2px;background:var(--surface2);border-radius:var(--r);padding:3px;margin-bottom:20px;width:100%;}
 .tab{flex:1;padding:10px 4px;font-size:13px;font-family:'Noto Sans JP',sans-serif;font-weight:500;border:none;background:none;color:var(--muted);border-radius:8px;cursor:pointer;transition:all .15s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;-webkit-appearance:none;}
 .tab.active{background:var(--surface);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,0.08);}
 .section{display:none;}.section.active{display:block;}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:12px;width:100%;}
-
-/* ── フォーム（デフォルトは縦並び） ── */
 .row{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;width:100%;}
 .row:last-child{margin-bottom:0;}
 .lbl{font-size:14px;color:var(--muted);font-weight:500;}
@@ -85,20 +72,14 @@ input[type=text],input[type=date],input[type=month],input[type=password],select,
 }
 input:focus,select:focus,textarea:focus{border-color:var(--blue);}
 textarea{resize:vertical;min-height:90px;line-height:1.6;}
-
-/* ── ボタン ── */
 .btn{display:block;width:100%;padding:14px;font-size:15px;font-family:'Noto Sans JP',sans-serif;font-weight:500;border:1px solid var(--border-md);border-radius:var(--rs);background:var(--surface);color:var(--text);cursor:pointer;text-align:center;-webkit-appearance:none;transition:all .12s;}
 .btn:active{opacity:.8;}
 .btn-p{background:var(--text);color:var(--surface);border-color:var(--text);}
 .btn-sm{display:inline-block;width:auto;padding:8px 14px;font-size:13px;}
 .btn-del{border-color:var(--red-bd);color:var(--red);}
 .fe{display:flex;flex-direction:column;gap:8px;margin-top:14px;}
-
-/* ── その他 ── */
 .sec-ttl{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:10px;}
 .notice{background:var(--blue-bg);color:var(--blue);font-size:13px;padding:10px 14px;border-radius:var(--rs);margin-bottom:12px;line-height:1.6;}
-
-/* ── 出席 ── */
 .s-row{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--border);width:100%;}
 .s-row:last-child{border-bottom:none;}
 .s-name{flex:1;font-size:16px;min-width:0;word-break:break-all;}
@@ -106,22 +87,16 @@ textarea{resize:vertical;min-height:90px;line-height:1.6;}
 .a-btn.P{background:var(--green-bg);color:var(--green);border-color:var(--green-bd);font-weight:700;}
 .a-btn.A{background:var(--red-bg);color:var(--red);border-color:var(--red-bd);font-weight:700;}
 .cnt{font-size:13px;color:var(--faint);min-width:36px;text-align:right;font-family:'DM Mono',monospace;flex-shrink:0;}
-
-/* ── 受講生リスト ── */
 .r-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:12px 0;border-bottom:1px solid var(--border);font-size:14px;width:100%;}
 .r-row:last-child{border-bottom:none;}
 .r-cls{font-size:12px;color:var(--blue);background:var(--blue-bg);padding:3px 8px;border-radius:4px;}
 .r-co{font-size:12px;color:var(--muted);width:100%;order:3;}
-
-/* ── 申し送り ── */
 .m-item{padding:12px 0;border-bottom:1px solid var(--border);}
 .m-item:last-child{border-bottom:none;}
 .m-meta{font-size:12px;color:var(--faint);margin-bottom:4px;font-family:'DM Mono',monospace;}
 .m-body{font-size:15px;line-height:1.7;}
 .m-next{font-size:14px;color:var(--muted);margin-top:4px;}
 .m-who{color:var(--blue);font-weight:500;font-style:normal;}
-
-/* ── 報告書 ── */
 .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;width:100%;}
 .metric{background:var(--surface2);border-radius:var(--rs);padding:12px;}
 .metric-l{font-size:11px;color:var(--faint);margin-bottom:2px;}
@@ -145,8 +120,6 @@ textarea{resize:vertical;min-height:90px;line-height:1.6;}
 .rp-text{background:var(--bg);border:1px solid var(--border);border-radius:var(--rs);padding:12px;font-size:12px;font-family:'DM Mono',monospace;line-height:1.9;overflow-x:auto;white-space:pre;color:var(--text);margin-bottom:10px;-webkit-overflow-scrolling:touch;}
 .copy-bar{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
 .hint{font-size:12px;color:var(--faint);}
-
-/* ── トースト・モーダル ── */
 .toast{font-size:13px;color:var(--green);text-align:right;margin-top:6px;height:18px;opacity:0;transition:opacity .2s;}
 .toast.show{opacity:1;}
 .confirm-modal{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:none;align-items:center;justify-content:center;z-index:400;padding:20px;}
@@ -155,15 +128,11 @@ textarea{resize:vertical;min-height:90px;line-height:1.6;}
 .confirm-title{font-size:16px;font-weight:700;margin-bottom:8px;}
 .confirm-msg{font-size:14px;color:var(--muted);margin-bottom:20px;line-height:1.6;}
 .confirm-btns{display:flex;justify-content:flex-end;gap:8px;}
-
-/* ── 下部ナビゲーション ── */
 .bottom-nav{display:block;position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);z-index:200;padding:6px 0 env(safe-area-inset-bottom,8px);}
 .bottom-nav-inner{display:flex;justify-content:space-around;max-width:680px;margin:0 auto;}
 .bnav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 2px;font-size:11px;color:var(--faint);background:none;border:none;cursor:pointer;font-family:'Noto Sans JP',sans-serif;transition:color .15s;-webkit-appearance:none;}
 .bnav-btn.active{color:var(--blue);}
 .bnav-icon{font-size:22px;line-height:1.2;}
-
-/* ── PCのみタブ表示・下部ナビ非表示 ── */
 @media screen and (min-width:769px){
   body{font-size:14px;}
   .login-card{max-width:400px;}
@@ -197,7 +166,6 @@ textarea{resize:vertical;min-height:90px;line-height:1.6;}
 </head>
 <body>
 
-<!-- ログイン画面 -->
 <div id="login-screen">
   <div class="login-wrap">
     <div class="login-card">
@@ -224,7 +192,6 @@ textarea{resize:vertical;min-height:90px;line-height:1.6;}
   </div>
 </div>
 
-<!-- メイン画面 -->
 <div id="main-screen" style="display:none;">
 <div class="confirm-modal" id="confirm-modal">
   <div class="confirm-box">
@@ -263,7 +230,6 @@ textarea{resize:vertical;min-height:90px;line-height:1.6;}
     <button class="tab" id="tab-users" onclick="switchTab('users',this)" style="display:none;">ユーザー管理</button>
   </div>
 
-  <!-- 出席記録 -->
   <div class="section active" id="sec-att">
     <div class="card">
       <div class="row"><span class="lbl">授業日</span><input type="date" id="att-date"></div>
@@ -274,7 +240,6 @@ textarea{resize:vertical;min-height:90px;line-height:1.6;}
     <div class="toast" id="att-toast">保存しました</div>
   </div>
 
-  <!-- 受講生 -->
   <div class="section" id="sec-roster">
     <div class="card" id="roster-add-card">
       <div class="sec-ttl">受講生を追加</div>
@@ -292,7 +257,6 @@ textarea{resize:vertical;min-height:90px;line-height:1.6;}
     <div class="toast" id="roster-toast">保存しました</div>
   </div>
 
-  <!-- 申し送り -->
   <div class="section" id="sec-memo">
     <div class="card">
       <div class="row"><span class="lbl">授業日</span><input type="date" id="memo-date"></div>
@@ -306,7 +270,6 @@ textarea{resize:vertical;min-height:90px;line-height:1.6;}
     <div class="card" style="margin-top:14px;"><div class="sec-ttl">過去の申し送り</div><div id="memo-hist" style="font-size:13px;color:var(--faint);">まだ記録がありません</div></div>
   </div>
 
-  <!-- 報告書 -->
   <div class="section" id="sec-report">
     <div class="card">
       <div class="row"><span class="lbl">対象月</span><input type="month" id="rp-month"></div>
@@ -331,7 +294,6 @@ textarea{resize:vertical;min-height:90px;line-height:1.6;}
     </div>
   </div>
 
-  <!-- ユーザー管理（管理者のみ） -->
   <div class="section" id="sec-users">
     <div class="notice">管理者のみ表示されます。講師のID・パスワードをここで管理してください。</div>
     <div class="card">
@@ -427,13 +389,33 @@ function startApp(){
   loadAll();
 }
 
-async function apiFetch(action,body){
+// ★ 修正: GETからPOSTに変更
+// actionはURLパラメータ、dataはPOSTボディで送信
+// GAS側でdoPost(e)が必要（下記のGASコード参照）
+async function apiFetch(action, body){
   try{
-    let url=SCRIPT_URL+'?action='+encodeURIComponent(action);
-    if(body) url+='&data='+encodeURIComponent(JSON.stringify(body));
-    const res=await fetch(url,{method:'GET'});
-    return await res.json();
-  }catch(e){return{error:e.message};}
+    // GETリクエストの場合（loginAdmin/loginInstructor/getAll）はデータが少ないのでURLに載せる
+    // 保存系はPOSTで送る
+    const readOnlyActions = ['loginAdmin','loginInstructor','getAll'];
+    if(readOnlyActions.includes(action)){
+      // 読み取り・認証系：GETのままURLパラメータで送る（データが小さいため）
+      let url = SCRIPT_URL + '?action=' + encodeURIComponent(action);
+      if(body) url += '&data=' + encodeURIComponent(JSON.stringify(body));
+      const res = await fetch(url, {method:'GET'});
+      return await res.json();
+    } else {
+      // 保存系：POSTでbodyに乗せる（データが大きくなるため）
+      const payload = {action, data: body};
+      const res = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        headers: {'Content-Type': 'text/plain;charset=utf-8'},
+        body: JSON.stringify(payload)
+      });
+      return await res.json();
+    }
+  }catch(e){
+    return {error: e.message};
+  }
 }
 
 let db={students:[],classes:[],attendance:{},memos:[],users:[]};
@@ -462,12 +444,19 @@ async function loadAll(){
 function boot(){
   fillSelects();renderAtt();renderRoster();renderClsList();renderMemoHist();
   if(currentUser?.role==='admin') renderUserList();
-  // 最初のタブをアクティブに
   switchTab('att', document.querySelector('.tab'));
 }
 
-async function syncStudents(){try{await apiFetch('saveStudents',{students:db.students});}catch(e){}}
-async function syncClasses(){try{await apiFetch('saveClasses',{classes:db.classes});}catch(e){}}
+async function syncStudents(){
+  setStatus('保存中...');
+  try{await apiFetch('saveStudents',{students:db.students});}catch(e){}
+  setStatus('');
+}
+async function syncClasses(){
+  setStatus('保存中...');
+  try{await apiFetch('saveClasses',{classes:db.classes});}catch(e){}
+  setStatus('');
+}
 async function syncAttendance(){
   const records=[];
   Object.entries(db.attendance).forEach(([key,rec])=>{
@@ -475,13 +464,43 @@ async function syncAttendance(){
   });
   try{await apiFetch('saveAttendance',{records});}catch(e){}
 }
-async function syncMemos(){try{await apiFetch('saveMemos',{memos:db.memos});}catch(e){}}
-async function syncUsers(){try{await apiFetch('saveUsers',{users:db.users});}catch(e){}}
+async function syncMemos(){
+  try{await apiFetch('saveMemos',{memos:db.memos});}catch(e){}
+}
+async function syncUsers(){
+  try{await apiFetch('saveUsers',{users:db.users});}catch(e){}
+}
 
-function switchTab(t,btn){
-  document.querySelectorAll('.tab,.bnav-btn').forEach(b=>b.classList.remove('active'));
+// ★ 修正: switchTabのactiveクラス切り替えを改善
+// タブとボトムナビを別々に処理してactiveが正しく反映されるよう修正
+function switchTab(t, btn){
+  // タブボタンのactive更新
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.bnav-btn').forEach(b=>b.classList.remove('active'));
+  // クリックされたボタンがタブかボトムナビかを判定してactiveを付与
+  if(btn){
+    btn.classList.add('active');
+    // 対応する反対側のボタンにもactiveを付与
+    if(btn.classList.contains('tab')){
+      // タブクリック → 対応するbnav-btnをactive
+      const bnavBtns = document.querySelectorAll('.bnav-btn');
+      bnavBtns.forEach(b=>{
+        if(b.getAttribute('onclick')&&b.getAttribute('onclick').includes("'"+t+"'")){
+          b.classList.add('active');
+        }
+      });
+    } else if(btn.classList.contains('bnav-btn')){
+      // bnav-btnクリック → 対応するタブをactive
+      const tabs = document.querySelectorAll('.tab');
+      tabs.forEach(b=>{
+        if(b.getAttribute('onclick')&&b.getAttribute('onclick').includes("'"+t+"'")){
+          b.classList.add('active');
+        }
+      });
+    }
+  }
+  // セクション切り替え
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  if(btn) btn.classList.add('active');
   const sec=document.getElementById('sec-'+t);
   if(sec) sec.classList.add('active');
   if(t==='att'){fillSelects();renderAtt();}
